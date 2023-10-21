@@ -3,6 +3,7 @@
 #include "mbed.h"
 #include "arm_book_lib.h"
 #include "display.h"
+#include "pc_serial_com.h"
 
 //=====[Declaration of private defines]========================================
 
@@ -229,8 +230,10 @@ void displayCharPositionWrite( uint8_t charPositionX, uint8_t charPositionY )
     }
 }
 
-void displayStringWrite( const char * str )
-{
+void displayStringWrite( const char * str ){   
+    pcSerialComStringWrite( str ); // esto es lo que cambiamos
+    pcSerialComStringWrite( "\r\n" ); 
+
     while (*str) {
         displayCodeWrite(DISPLAY_RS_DATA, *str++);
     }
